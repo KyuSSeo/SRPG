@@ -10,6 +10,7 @@ public class InputController : MonoBehaviour
     const float _tapRate = 0.1f;
     float _horNext, _verNext;
     bool _horHold, _verHold;
+    //  버튼 보관
     string[] _buttons = new string[] { "Fire1", "Fire2", "Fire3" };
 
     //  이벤트
