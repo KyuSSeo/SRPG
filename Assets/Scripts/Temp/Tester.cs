@@ -15,12 +15,13 @@ public class Tester : MonoBehaviour
         InputController.moveEvent -= OnMoveEvent;
         InputController.fireEvent -= OnFireEvent;
     }
-    public void OnMoveEvent(object aender, InfoEventArgs<Point> e) 
+    public void OnMoveEvent(object sender, InfoEventArgs<Point> e)
     {
-        throw new System.NotImplementedException();
+        Debug.Log($"Move Event Received: Direction = ({e.info.x}, {e.info.y})");
     }
-    public void OnFireEvent(object aender, InfoEventArgs<int> a)
+
+    public void OnFireEvent(object sender, InfoEventArgs<int> e)
     {
-        throw new System.NotImplementedException();
+        Debug.Log($"Fire Event Received: Button Index = {e.info}");
     }
 }
