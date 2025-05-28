@@ -11,7 +11,7 @@ public class Tile : MonoBehaviour
     public const float stepHeight = 0.25f;
     
     //  타일 중심에 캐릭터가 위치하도록
-    public Vector3 centor { get { return new Vector3(pos.x, height * stepHeight, pos.y); } }
+    public Vector3 center { get { return new Vector3(pos.x, height * stepHeight, pos.y); } }
    
     //  타일 변형
     public void Grow()
