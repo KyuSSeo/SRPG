@@ -10,18 +10,7 @@ public class StateMachine : MonoBehaviour
 
     public virtual State CurrentState {
         get { return _currentState; }
-        set 
-        {
-            if (_currentState == value)
-                return;
-            if (_currentState != null)
-                _currentState.Exit();
-
-            _currentState = value;
-
-            if (_currentState != null)
-                _currentState.Enter();
-        }
+        set { Trensition(value); }
     }
 
     public virtual T GetState<T> () where T : State
@@ -37,8 +26,10 @@ public class StateMachine : MonoBehaviour
     }
     protected virtual void Trensition (State value)
     {
+        //  동일한 상태로 전환 시도 시 종료
         if (_currentState == value || _inTransition)
             return;
+
         _inTransition = true;
         if (_currentState != null)
             _currentState.Exit();
