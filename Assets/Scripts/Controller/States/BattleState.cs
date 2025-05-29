@@ -10,7 +10,7 @@ public class BattleState : State
     public Board board { get { return owner.board; } }
     public LevelData levelData { get { return owner.levelData; } }
     public Transform tileSelectionIndicator { get { return owner.tileSelectionIndicator; } }
-    public Point pos { get { return owner.pos; } set { owner.pos = value} }
+    public Point pos { get { return owner.pos; } set { owner.pos = value; } }
 
 
 
