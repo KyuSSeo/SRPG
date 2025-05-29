@@ -23,11 +23,8 @@ public abstract class Movement : MonoBehaviour
         return retValue;
     }
 
-    public virtual IEnumerator Traverse(Tile tile)
-    {
-        unit.Place(tile);
-        yield return null;
-    }
+    public abstract IEnumerator Traverse(Tile tile);
+
 
     //  이동 가능 여부 반환
     protected virtual bool ExpandSearch(Tile from, Tile tile)
