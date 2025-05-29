@@ -5,6 +5,7 @@ using UnityEngine;
 
 
 //  레벨 데이터를 가져와서 게임에 레벨(스테이지)을 생성하는 코드
+//  경로 탐색
 public class Board : MonoBehaviour
 {
     [SerializeField] GameObject tilePrefab;
@@ -107,7 +108,7 @@ public class Board : MonoBehaviour
             t.distance = int.MaxValue;
         }
     }
-
+    //  탐색 타일 정보 교환
     private void SwapRefrence(ref Queue<Tile> a, ref Queue<Tile> b)
     {
         Queue<Tile> temp = a;
