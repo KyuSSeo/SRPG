@@ -23,8 +23,35 @@ public class InitBattleState :BattleState
         Point p = new Point((int)levelData.tiles[0].x, (int)levelData.tiles[0].z);
         //  초기 타일 선택
         SelectTile(p);
+        SpawnTestUnits();   // TODO : 임시 코드.
+
         yield return null;
         //  맵 초기화 완료 후 상태 전환
-        owner.ChangeState<MoveTargetState>();
+        owner.ChangeState<SelectUnitState>();
+    }
+
+    private void SpawnTestUnits()
+    {
+        System.Type[] components = new System.Type[]
+        {
+            typeof(WalkMovement),
+            typeof(FlyMovement),
+            typeof(TeleportMovement)
+        };
+
+        for (int i = 0; i < 3; i++) 
+        {
+            GameObject instance = Instantiate(owner.heroPrefab) as GameObject;
+
+            Point p = new Point((int)levelData.tiles[i].x, (int)levelData.tiles[i].z);
+            
+            Unit unit = instance.GetComponent<Unit>();
+            unit.Place(board.GetTile(p));
+            unit.Match();
+
+            Movement m = instance.AddComponent(components[i]) as Movement;
+            m.range = 5;
+            m.jumpHeight = 1;
+        }
     }
 }
