@@ -16,6 +16,7 @@ public static class DirectionsExtensions
         return Directions.West;
     }
 
+    //  열거형 방위를 int변환하여 각도 변경
     public static Vector3 ToEuler(this Directions dir)
     {
         return new Vector3(0, (int)dir * 90, 0);
