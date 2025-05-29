@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,28 @@ public class Board : MonoBehaviour
             Tile t = instance.GetComponent<Tile>();
             t.Load(mapData.tiles[i]);
             tiles.Add(t.pos, t);
+        }
+    }
+    //  경로 탐색 알고리즘
+    public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile)
+    {
+        List<Tile> retValue = new List<Tile>();
+        retValue.Add(start);
+        //TODO : 경로 탐색 알고리즘 구현
+
+        return retValue;
+    }
+    public Tile GetTile(Point p)
+    {
+
+    }
+    //  경로 탐색 이전, 이전에 탐색했던 결과를 지워주는 작업
+    private void ClearSearch()
+    {
+        foreach (Tile t in tiles.Values)
+        {
+            t.prev = null;
+            t.distance = int.MaxValue;
         }
     }
 }
