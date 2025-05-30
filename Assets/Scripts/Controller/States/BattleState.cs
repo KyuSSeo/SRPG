@@ -18,6 +18,7 @@ public class BattleState : State
     private void Init()
     {
         owner = GetComponent<BattleController>();
+        owner.ChangeState<CutSceneState>();
     }
 
 

@@ -13,12 +13,18 @@ MonoBehaviour:
   m_Name: IntroScene
   m_EditorClassIdentifier: 
   list:
-  - messages: []
-    speaker: {fileID: 0}
+  - messages:
+    - "\uAE40\uCC3D\uC12D"
+    - "\uC2E0\uCC3D\uC12D"
+    - "\uACF1\uCC3D\uC12D"
+    speaker: {fileID: 21300000, guid: 4df3bdf65a08cf040b6726a060a942b6, type: 3}
     anchor: 0
-  - messages: []
-    speaker: {fileID: 0}
+  - messages:
+    - "\uB9C9\uCC3D\uC12D"
+    - "\uB300\uCC3D\uC12D"
+    speaker: {fileID: 21300000, guid: 4df3bdf65a08cf040b6726a060a942b6, type: 3}
     anchor: 0
-  - messages: []
-    speaker: {fileID: 0}
+  - messages:
+    - "\uB3C4\uB798\uCC3D\uC12D"
+    speaker: {fileID: 21300000, guid: 4df3bdf65a08cf040b6726a060a942b6, type: 3}
     anchor: 0
