@@ -18,9 +18,11 @@ public class BattleState : State
     private void Init()
     {
         owner = GetComponent<BattleController>();
+    }
+    protected virtual void Start()
+    {
         owner.ChangeState<CutSceneState>();
     }
-
 
     //  이벤트 등록
 

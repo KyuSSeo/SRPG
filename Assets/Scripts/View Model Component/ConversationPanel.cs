@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 public class ConversationPanel : MonoBehaviour
 {
     //  대화
-    public Text message;
+    public TextMeshProUGUI message;
     //  객체 배정된 이미지
     public Image speaker;
     public GameObject arrow;

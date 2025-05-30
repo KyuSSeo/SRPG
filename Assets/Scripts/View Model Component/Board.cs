@@ -27,7 +27,7 @@ public class Board : MonoBehaviour
     //  타일 불러오는 과정
     public void Load(LevelData mapData)
     {
-        for (int i = 0; i < tiles.Count; ++i)
+        for (int i = 0; i < mapData.tiles.Count; ++i)
         { 
             GameObject instance = Instantiate(tilePrefab) as GameObject;
             Tile t = instance.GetComponent<Tile>();
