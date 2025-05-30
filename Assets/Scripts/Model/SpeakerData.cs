@@ -5,7 +5,7 @@ using UnityEngine;
 
 //  인스팩터 상에서 설정하기
 [System.Serializable]
-public class SpeakerData : MonoBehaviour
+public class SpeakerData
 {   
     //  한 객체가 말하는 모든 대사
     public List<string> messages;
