@@ -12,4 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff16c467d014c814e81df8ba18d9829d, type: 3}
   m_Name: IntroScene
   m_EditorClassIdentifier: 
-  list: []
+  list:
+  - messages: []
+    speaker: {fileID: 0}
+    anchor: 0
+  - messages: []
+    speaker: {fileID: 0}
+    anchor: 0
+  - messages: []
+    speaker: {fileID: 0}
+    anchor: 0
