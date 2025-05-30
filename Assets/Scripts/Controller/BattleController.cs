@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 
@@ -13,6 +9,13 @@ public class BattleController : StateMachine
     public LevelData levelData;
     public Transform tileSelectionIndicator;
     public Point pos;
+    
+    //  ∏ ø° øµøı¿ª ¿ŒΩ∫≈œ∆Æ»≠
+    public GameObject heroPrefab;
+    public Unit currentUnit;
+    public Tile currentTile { get { return board.GetTile(pos); } }
+
+
     void Start()
     {
         ChangeState<InitBattleState>();
