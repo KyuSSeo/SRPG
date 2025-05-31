@@ -1,43 +1,133 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using Unity.VisualScripting;
 
-public class ObjectPoolerScript : MonoBehaviour
+// 풀의 정보를 저장
+public class PoolData
 {
-    public static ObjectPoolerScript current;
-    public GameObject pooledObject;
-    public int pooledAmount = 20;
-    public bool willGrow = true;
-    List<GameObject> pooledObjects;
+    public GameObject prefab;
+    public int maxCount;
+    public Queue<Poolable> pool;
+}
+
+//  풀 관리 컨트롤러
+public class GameObjectPoolController : MonoBehaviour
+{
+    #region Fields / Properties
+    static GameObjectPoolController Instance
+    {
+        get
+        {
+            if (instance == null)
+                CreateSharedInstance();
+            return instance;
+        }
+    }
+    static GameObjectPoolController instance;
+
+    static Dictionary<string, PoolData> pools = new Dictionary<string, PoolData>();
+    #endregion
+
+    #region MonoBehaviour
     void Awake()
     {
-        current = this;
+        if (instance != null && instance != this)
+            Destroy(this);
+        else
+            instance = this;
     }
-    void Start()
+    #endregion
+
+    #region Public
+    public static void SetMaxCount(string key, int maxCount)
     {
-        pooledObjects = new List<GameObject>();
-        for (int i = 0; i < pooledAmount; ++i)
-        {
-            GameObject obj = (GameObject)Instantiate(pooledObject);
-            obj.SetActive(false);
-            pooledObjects.Add(obj);
-        }
+        if (!pools.ContainsKey(key))
+            return;
+        PoolData data = pools[key];
+        data.maxCount = maxCount;
     }
-    public GameObject GetPooledObject()
+
+    //  풀 초기화
+    public static bool AddEntry(string key, GameObject prefab, int prepopulate, int maxCount)
     {
-        for (int i = 0; i < pooledObjects.Count; ++i)
-        {
-            if (!pooledObjects[i].activeInHierarchy)
-            {
-                return pooledObjects[i];
-            }
-        }
-        if (willGrow)
-        {
-            GameObject obj = (GameObject)Instantiate(pooledObject);
-            pooledObjects.Add(obj);
-            return obj;
-        }
-        return null;
+        if (pools.ContainsKey(key))
+            return false;
+
+        PoolData data = new PoolData();
+        data.prefab = prefab;
+        data.maxCount = maxCount;
+        data.pool = new Queue<Poolable>(prepopulate);
+        pools.Add(key, data);
+
+        for (int i = 0; i < prepopulate; ++i)
+            Enqueue(CreateInstance(key, prefab));
+
+        return true;
     }
+
+    //  풀 제거
+    public static void ClearEntry(string key)
+    {
+        if (!pools.ContainsKey(key))
+            return;
+
+        PoolData data = pools[key];
+        while (data.pool.Count > 0)
+        {
+            Poolable obj = data.pool.Dequeue();
+            GameObject.Destroy(obj.gameObject);
+        }
+        pools.Remove(key);
+    }
+
+    // 풀 반환, 사용 처리
+    public static void Enqueue(Poolable sender)
+    {
+        if (sender == null || sender.isPooled || !pools.ContainsKey(sender.key))
+            return;
+
+        PoolData data = pools[sender.key];
+        if (data.pool.Count >= data.maxCount)
+        {
+            GameObject.Destroy(sender.gameObject);
+            return;
+        }
+
+        data.pool.Enqueue(sender);
+        sender.isPooled = true;
+        sender.transform.SetParent(Instance.transform);
+        sender.gameObject.SetActive(false);
+    }
+    public static Poolable Dequeue(string key)
+    {
+        if (!pools.ContainsKey(key))
+            return null;
+
+        PoolData data = pools[key];
+        if (data.pool.Count == 0)
+            return CreateInstance(key, data.prefab);
+
+        Poolable obj = data.pool.Dequeue();
+        obj.isPooled = false;
+        return obj;
+    }
+    #endregion
+
+    #region Private
+    static void CreateSharedInstance()
+    {
+        GameObject obj = new GameObject("GameObject Pool Controller");
+        DontDestroyOnLoad(obj);
+        instance = obj.AddComponent<GameObjectPoolController>();
+    }
+
+    static Poolable CreateInstance(string key, GameObject prefab)
+    {
+        GameObject instance = Instantiate(prefab) as GameObject;
+        Poolable p = instance.AddComponent<Poolable>();
+        p.key = key;
+        return p;
+    }
+    #endregion
 }
