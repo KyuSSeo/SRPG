@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+// 개별 능력 메뉴 항목 관리
 public class AbilityMenuEntry : MonoBehaviour
 {
     [SerializeField] private Image bullet;
@@ -14,8 +16,11 @@ public class AbilityMenuEntry : MonoBehaviour
     [SerializeField] private Sprite disabledSprite;
     
     [SerializeField] private TextMeshPro label;
+
     //  윤곽선
     private Outline outline;
+    //   현재 상태 저장
+    private States state;
 
     private void Awake()
     {
@@ -28,23 +33,29 @@ public class AbilityMenuEntry : MonoBehaviour
         set { label.text = value; }
     }
 
+    //  잠겨 있는지 확인
     public bool IsLocked
-    {
+    {   
+        //  
         get { return (State & States.Locked) != States.None; }
         set
-        {
+        {   
+            //  잠금 설정, 해제
             if (value)
-                State |= States.Locked;
+                State |= States.Locked;     
             else
                 State &= ~States.Locked;
         }
     }
 
+
+    // 선택되었는지 확인
     public bool IsSelected
     {
         get { return (State & States.Selected) != States.None; }
         set
         {
+            //  선택 설장, 해제
             if (value)
                 State |= States.Selected;
             else
@@ -52,15 +63,18 @@ public class AbilityMenuEntry : MonoBehaviour
         }
     }
 
+
     private States State
     {
         get { return state; }
         set
         {
+            //  상태 갱신 필요 없으면 빠져나가기
             if (state == value)
                 return;
             state = value;
 
+            //  상태에 따른 색 설정
             if (IsLocked)
             {
                 bullet.sprite = disabledSprite;
@@ -81,18 +95,32 @@ public class AbilityMenuEntry : MonoBehaviour
             }
         }
     }
-    States state;
+    
 
+    //  상태 초기화하기
     public void Reset()
     {
         State = States.None;
     }
 
+    //  매뉴 상태 열거형
+    //  비트 연산 가능 추가 https://www.youtube.com/watch?v=IYAHieM4iZE
     [System.Flags]
     enum States
-    {
+    {   
+        //  아무 상태도 적용되지 않았음
         None = 0,
+        //  선택된 상태
         Selected = 1 << 0,
+        //  잠긴 상태
         Locked = 1 << 1
+
+        // And 연산을 통해 None 과 비교함으로 어떤 상태들이 적용되었는지 확인 가능
+        /*상태 설정
+          States.None	                    0000	아무 상태 아님
+          States.Selected	                0001	선택됨
+          States.Locked	                    0010	잠김
+          States.Selected, States.Locked	0011    선택되고 잠김
+        */
     }
 }
