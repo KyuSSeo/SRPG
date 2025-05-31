@@ -24,12 +24,5 @@ public class AbilityMenuPanelController : MonoBehaviour
 
     //  메뉴 항목들을 저장하는 리스트
     List<AbilityMenuEntry> menuEntries = new List<AbilityMenuEntry>(MenuCount);
-    //  선택된 메뉴 전달하기
-    public int selection { get; private set; }
-
-    private void Awake()
-    {
-        GameObjectPoolController.AddEntry(EntryPoolKey, entryPrefab, MenuCount, int.MaxValue);
-    }
 }
 
