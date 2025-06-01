@@ -15,7 +15,7 @@ public class AbilityMenuEntry : MonoBehaviour
     [SerializeField] private Sprite selectedSprite;
     [SerializeField] private Sprite disabledSprite;
     
-    [SerializeField] private TextMeshPro label;
+    [SerializeField] private TextMeshProUGUI label;
 
     //  À±°û¼±
     private Outline outline;

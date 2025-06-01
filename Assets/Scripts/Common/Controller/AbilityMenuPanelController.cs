@@ -18,7 +18,7 @@ public class AbilityMenuPanelController : MonoBehaviour
 
     //  메뉴 항목
     [SerializeField] private GameObject entryPrefab;
-    [SerializeField] private TextMeshPro titleLabel;
+    [SerializeField] private TextMeshProUGUI titleLabel;
     [SerializeField] private Panel panel;
     [SerializeField] private GameObject canvas;
 
