@@ -36,7 +36,6 @@ public class AbilityMenuEntry : MonoBehaviour
     //  잠겨 있는지 확인
     public bool IsLocked
     {   
-        //  
         get { return (State & States.Locked) != States.None; }
         set
         {   
@@ -104,7 +103,7 @@ public class AbilityMenuEntry : MonoBehaviour
     }
 
     //  매뉴 상태 열거형
-    //  비트 연산 가능 추가 https://www.youtube.com/watch?v=IYAHieM4iZE
+    //  비트 연산 가능 https://www.youtube.com/watch?v=IYAHieM4iZE
     [System.Flags]
     enum States
     {   

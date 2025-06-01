@@ -6,19 +6,25 @@ using UnityEngine;
 public class BattleState : State
 {
     protected BattleController owner;
+
+    //  BattleController 참조 가져오기
     public CameraRig cameraRig { get { return owner.cameraRig; } }
     public Board board { get { return owner.board; } }
     public LevelData levelData { get { return owner.levelData; } }
     public Transform tileSelectionIndicator { get { return owner.tileSelectionIndicator; } }
     public Point pos { get { return owner.pos; } set { owner.pos = value; } }
+    public AbilityMenuPanelController abilityMenuPanelController { get { return owner.abilityMenuPanelController; } }
+    public Turn turn { get { return owner.turn; } }
+    public List<Unit> units { get { return owner.units; } }
 
-
-
+    //  초기화
     protected virtual void Awake() => Init();
     private void Init()
     {
         owner = GetComponent<BattleController>();
     }
+
+    // 상태가 활성화될 때 상태 설정
     protected virtual void Start()
     {
         owner.ChangeState<CutSceneState>();
