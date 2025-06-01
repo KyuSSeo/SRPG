@@ -1,21 +1,14 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-
-// 풀의 정보를 저장
-public class PoolData
-{
-    public GameObject prefab;
-    public int maxCount;
-    public Queue<Poolable> pool;
-}
 
 //  풀 관리 컨트롤러
 public class GameObjectPoolController : MonoBehaviour
 {
-    #region Fields / Properties
-    static GameObjectPoolController Instance
+
+    private static Dictionary<string, PoolData> pools = new Dictionary<string, PoolData>();
+    private static GameObjectPoolController instance;
+    private static GameObjectPoolController Instance
     {
         get
         {
@@ -24,20 +17,14 @@ public class GameObjectPoolController : MonoBehaviour
             return instance;
         }
     }
-    static GameObjectPoolController instance;
 
-    static Dictionary<string, PoolData> pools = new Dictionary<string, PoolData>();
-    #endregion
-
-    #region MonoBehaviour
-    void Awake()
+    private void Awake()
     {
         if (instance != null && instance != this)
             Destroy(this);
         else
             instance = this;
     }
-    #endregion
 
     #region Public
     public static void SetMaxCount(string key, int maxCount)
@@ -115,14 +102,14 @@ public class GameObjectPoolController : MonoBehaviour
     #endregion
 
     #region Private
-    static void CreateSharedInstance()
+    private static void CreateSharedInstance()
     {
         GameObject obj = new GameObject("GameObject Pool Controller");
         DontDestroyOnLoad(obj);
         instance = obj.AddComponent<GameObjectPoolController>();
     }
 
-    static Poolable CreateInstance(string key, GameObject prefab)
+    private static Poolable CreateInstance(string key, GameObject prefab)
     {
         GameObject instance = Instantiate(prefab) as GameObject;
         Poolable p = instance.AddComponent<Poolable>();
