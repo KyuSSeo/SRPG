@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+
 public class ExploreState : BattleState
 {
     protected override void OnMove(object sender, InfoEventArgs<Point> e)

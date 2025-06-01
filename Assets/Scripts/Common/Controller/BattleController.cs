@@ -20,8 +20,6 @@ public class BattleController : StateMachine
     //  맵에 영웅을 인스턴트화
     public GameObject heroPrefab;
 
-    //  선택 유닛과 타일
-    public Unit currentUnit;
     public Tile currentTile { get { return board.GetTile(pos); } }
 
     // 능력 선택 메뉴 UI
