@@ -24,7 +24,7 @@ public class AbilityMenuEntry : MonoBehaviour
 
     private void Awake()
     {
-        outline = GetComponent<Outline>();
+        outline = GetComponentInChildren<Outline>();
     }
 
     public string Title

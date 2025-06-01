@@ -16,7 +16,6 @@ public class MoveTargetState : BattleState
     {
         if (e.info == 0)
         {
-
               if (tiles.Contains(owner.currentTile))
                 owner.ChangeState<MoveSequenceState>();
         }
