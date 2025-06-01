@@ -17,8 +17,9 @@ public class CommandSelectionState : BaseAbilityMenuState
             menuOptions.Add("Action");
             menuOptions.Add("Wait");
         }
-
+        // 메뉴 표시
         abilityMenuPanelController.Show(menuTitle, menuOptions);
+        // 행동한 경우 비활성화
         abilityMenuPanelController.SetLocked(0, turn.hasUnitMoved);
         abilityMenuPanelController.SetLocked(1, turn.hasUnitActed);
     }
@@ -28,20 +29,21 @@ public class CommandSelectionState : BaseAbilityMenuState
     {
         switch (abilityMenuPanelController.selection)
         {
-            case 0: // Move
+            case 0: // 이동 대상 선택 상태
                 owner.ChangeState<MoveTargetState>();
                 break;
-            case 1: // Action
+            case 1: // 행동 종류 선택 상태
                 owner.ChangeState<CategorySelectionState>();
                 break;
-            case 2: // Wait
+            case 2: // 해당 유닛 행동 종료후 다음 유닛 선택 상태
                 owner.ChangeState<SelectUnitState>();
                 break;
         }
     }
     //  취소, 대기
     protected override void Cancel()
-    {
+
+    {   //  이동 되돌리기
         if (turn.hasUnitMoved && !turn.lockMove)
         {
             turn.UndoMove();
@@ -49,7 +51,7 @@ public class CommandSelectionState : BaseAbilityMenuState
             SelectTile(turn.actor.tile.pos);
         }
         else
-        {
+        {   
             owner.ChangeState<ExploreState>();
         }
     }
