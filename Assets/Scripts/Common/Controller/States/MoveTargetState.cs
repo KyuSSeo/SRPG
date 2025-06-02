@@ -5,8 +5,8 @@ using UnityEngine;
 //  이동 목표 타일을 선택
 public class MoveTargetState : BattleState
 {
-    private List<Tile> tiles;
- 
+    List<Tile> tiles;
+
     // 이동 입력 발생 시 현재 위치(pos)에 입력 방향(e.info)를 더해 새로운 타일 선택
     protected override void OnMove(object sender, InfoEventArgs<Point> e)
     {
@@ -16,7 +16,7 @@ public class MoveTargetState : BattleState
     {
         if (e.info == 0)
         {
-              if (tiles.Contains(owner.currentTile))
+            if (tiles.Contains(owner.currentTile))
                 owner.ChangeState<MoveSequenceState>();
         }
         else
