@@ -29,7 +29,7 @@ public class WalkMovement : Movement
             tile = tile.prev;
         }
         //  경로를 연속적으로 이동
-        for (int i = 0; i < targets.Count; i++)
+        for (int i = 1; i < targets.Count; i++)
         {
             //  현제 위치부터 다음 위치로
             Tile from = targets[i - 1];
