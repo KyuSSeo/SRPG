@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Rank : MonoBehaviour
 {
-    //  레벨 정보
+    //  레벨 범위 정보
     #region Consts
     public const int minLevel = 1;
     public const int maxLevel = 99;
@@ -11,6 +11,7 @@ public class Rank : MonoBehaviour
     #endregion
 
     #region Fields / Properties
+    // 현재 레벨과 경험치를 반환
     public int LVL
     {
         get { return stats[StatTypes.LVL]; }
@@ -27,7 +28,7 @@ public class Rank : MonoBehaviour
         get { return (float)(LVL - minLevel) / (float)(maxLevel - minLevel); }
     }
 
-    Stats stats;
+    private Stats stats;
     #endregion
 
     #region MonoBehaviour
@@ -56,6 +57,7 @@ public class Rank : MonoBehaviour
     private void OnExpWillChange(object sender, object args)
     {
         ValueChangeException vce = args as ValueChangeException;
+        //  변경은 최대치까지만
         vce.AddModifier(new ClampValueModifier(int.MaxValue, EXP, maxExperience));
     }
     //  값 변경
@@ -74,6 +76,7 @@ public class Rank : MonoBehaviour
         return (int)EasingEquations.EaseInQuad(0, maxExperience, levelPercent);
     }
 
+    //  경험치에 따른 레벨계산
     public static int LevelForExperience(int exp)
     {
         int lvl = maxLevel;
@@ -83,6 +86,7 @@ public class Rank : MonoBehaviour
         return lvl;
     }
 
+    //  레벨정보 초기화
     public void Init(int level)
     {
         stats.SetValue(StatTypes.LVL, level, false);
