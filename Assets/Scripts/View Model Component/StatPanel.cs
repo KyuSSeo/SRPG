@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 public class StatPanel : MonoBehaviour
 {
@@ -10,10 +11,10 @@ public class StatPanel : MonoBehaviour
     public Sprite enemyBackground;
     public Image background;
     public Image avatar;
-    public Text nameLabel;
-    public Text hpLabel;
-    public Text mpLabel;
-    public Text lvLabel;
+    public TextMeshProUGUI nameLabel;
+    public TextMeshProUGUI hpLabel;
+    public TextMeshProUGUI mpLabel;
+    public TextMeshProUGUI lvLabel;
 
     //  Dispaly를 통하여 전달
     public void Display(GameObject obj)
