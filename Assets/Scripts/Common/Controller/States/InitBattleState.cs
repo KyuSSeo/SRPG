@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 // 전투 시작 시 초기 보드 설정 및 타일을 처리
 public class InitBattleState :BattleState
 {
@@ -35,30 +33,38 @@ public class InitBattleState :BattleState
     //  유닛 배치 테스트 함수
     private void SpawnTestUnits()
     {
-        //  유닛의 이동 타입
-        System.Type[] components = new System.Type[]
+        //  유닛 타입
+        string[] jobs = new string[] { "Rogue", "Warrior", "Wizard" };
+        
+        //  유닛 생성
+        for (int i = 0; i < jobs.Length; ++i)
         {
-            typeof(WalkMovement),
-            typeof(FlyMovement),
-            typeof(TeleportMovement)
-        };
-
-        for (int i = 0; i < 3; i++) 
-        {
+            // 미리 설정된 프리팹을 인스턴스화
             GameObject instance = Instantiate(owner.heroPrefab) as GameObject;
             
+            //  초기 레벨 설정
+            Stats s = instance.AddComponent<Stats>();
+            s[StatTypes.LVL] = 1;
+
+            //  직업 등록
+            GameObject jobPrefab = Resources.Load<GameObject>("Jobs/" + jobs[i]);
+            GameObject jobInstance = Instantiate(jobPrefab) as GameObject;
+            jobInstance.transform.SetParent(instance.transform);
+            Job job = jobInstance.GetComponent<Job>();
+
+            //  직업 적용, 능력치 적용
+            job.Employ();
+            job.LoadDefaultStats();
+
             // 해당 유닛을 배치할 좌표 설정
             Point p = new Point((int)levelData.tiles[i].x, (int)levelData.tiles[i].z);
-            
+
             //  유닛 컴포넌트를 가져와서 배치
             Unit unit = instance.GetComponent<Unit>();
             unit.Place(board.GetTile(p));
             unit.Match();
 
-            //  이동 타입을 유닛에 추가
-            Movement m = instance.AddComponent(components[i]) as Movement;
-            m.range = 5;
-            m.jumpHeight = 1;
+            instance.AddComponent<WalkMovement>();
             //  전투 리스트에 유닛 추가
             units.Add(unit);
         }
