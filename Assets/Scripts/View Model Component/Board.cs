@@ -11,13 +11,16 @@ public class Board : MonoBehaviour
     [SerializeField] GameObject tilePrefab;
     //  맵 정보를 저장하는 딕셔너리
     public Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile>();
+    public Point min { get { return _min; } }
+    public Point max { get { return _max; } }
+
+    private Point _min;
+    private Point _max;
     private Color selectedTileColor = new Color(0, 1, 1, 1);
     private Color defaultTileColor = new Color(1, 1, 1, 1);
 
-
-
     //  큐에서 확인할 타일 선택용  
-    Point[] dirs = new Point[4]
+    private Point[] dirs = new Point[4]
     {
         new Point(0, 1),
         new Point(0, -1),
@@ -27,12 +30,21 @@ public class Board : MonoBehaviour
     //  타일 불러오는 과정
     public void Load(LevelData mapData)
     {
+        _min = new Point(int.MaxValue, int.MaxValue);
+        _max = new Point(int.MinValue, int.MinValue);
+
         for (int i = 0; i < mapData.tiles.Count; ++i)
         { 
             GameObject instance = Instantiate(tilePrefab) as GameObject;
+            instance.transform.SetParent(transform);
             Tile t = instance.GetComponent<Tile>();
             t.Load(mapData.tiles[i]);
             tiles.Add(t.pos, t);
+
+            _min.x = Mathf.Min(_min.x, t.pos.x);
+            _min.y = Mathf.Min(_min.y, t.pos.y);
+            _max.x = Mathf.Max(_max.x, t.pos.x);
+            _max.y = Mathf.Max(_max.y, t.pos.y);
         }
     }
 
@@ -55,7 +67,7 @@ public class Board : MonoBehaviour
         while(cheakNow.Count > 0)
         {
             Tile t = cheakNow.Dequeue();
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 4; ++i)
             {
                 // 탐색할 타일 정보 가져오기              
                 Tile nextTile = GetTile(t.pos + dirs[i]);
@@ -86,13 +98,13 @@ public class Board : MonoBehaviour
     }
 
     //  선택 타일 강조, 해제
-    public void SelectTiles(HashSet<Tile> tiles)
+    public void SelectTiles(List<Tile> tiles)
     {
         foreach (Tile t in tiles)
             t.GetComponent<Renderer>().material.color = selectedTileColor;
     }
 
-    public void DeSelectTiles(HashSet<Tile> tiles)
+    public void DeSelectTiles(List<Tile> tiles)
     {
         foreach (Tile t in tiles)
             t.GetComponent<Renderer>().material.color = defaultTileColor;
