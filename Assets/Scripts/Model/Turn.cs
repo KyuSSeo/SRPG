@@ -15,6 +15,7 @@ public class Turn
     //  이동이 가능한가? (이동 불가능한 이유가 있나?)
     public bool lockMove;
     public GameObject ability;
+    public List<Tile> targets;
     #endregion
 
 
