@@ -8,7 +8,7 @@ public class PoisonStatusEffect : StatusEffect
     {
         owner = GetComponentInParent<Unit>();
         if (owner)
-            this.AddObserver(OnNewTurn, TurnOrderController.TurnBeganNotifaication, owner);
+            this.AddObserver(OnNewTurn, TurnOrderController.TurnBeganNotification, owner);
     }
     private void OnDisable()
     {
