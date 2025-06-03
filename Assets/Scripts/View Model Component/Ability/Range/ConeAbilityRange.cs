@@ -17,6 +17,7 @@ public class ConeAbilityRange : AbilityRange
         int dir = (unit.dir == Directions.North || unit.dir == Directions.East) ? 1 : -1;
         int lateral = 1;
 
+        // TODO : X축, Y축 코드가 유사함으로 합치기
         //  남북
         if (unit.dir == Directions.North || unit.dir == Directions.South)
         {

@@ -16,6 +16,18 @@ public static class DirectionsExtensions
         return Directions.West;
     }
 
+    //  타일의 위치를 기준으로 방향 판단
+    public static Directions GetDirection(this Point p)
+    {
+        if (p.y > 0)
+            return Directions.North;
+        if (p.x > 0)
+            return Directions.East;
+        if (p.y < 0)
+            return Directions.South;
+        return Directions.West;
+    }
+
     //  열거형 방위를 int변환하여 각도 변경
     public static Vector3 ToEuler(this Directions dir)
     {

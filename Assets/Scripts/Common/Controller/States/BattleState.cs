@@ -65,7 +65,7 @@ public class BattleState : State
         pos = p;
         tileSelectionIndicator.localPosition = board.tiles[p].center;
     }
-
+    //  À¯´Ö ¹ÝÈ¯
     protected virtual Unit GetUnit(Point p)
     {
         Tile t = board.GetTile(p);

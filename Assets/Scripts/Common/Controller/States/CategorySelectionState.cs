@@ -60,10 +60,8 @@ public class CategorySelectionState : BaseAbilityMenuState
     private void Attack()
     {
         //  이동했을 경우 위치 고정
-        turn.hasUnitActed = true;
-        if (turn.hasUnitMoved)
-            turn.lockMove = true;
-        owner.ChangeState<CommandSelectionState>();
+        turn.ability = turn.actor.GetComponentInChildren<AbilityRange>().gameObject;
+        owner.ChangeState<AbilityTargetState>();
     }
 
     //  공격 외 행동 선택하는 리스트상태
