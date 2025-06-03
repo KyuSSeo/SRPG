@@ -28,6 +28,9 @@ public class BattleController : StateMachine
     public Turn turn = new Turn();
     //  맵에 전투중인 유닛들
     public List<Unit> units = new List<Unit>();
+    //  전투 스텟 UI 참조용
+    public StatPanelController statPanelController;
+
     #endregion
 
     private void Start()

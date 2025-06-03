@@ -15,6 +15,11 @@ public class SelectUnitState : BattleState
         base.Enter();
         StartCoroutine("ChangeCurrentUnit");
     }
+    public override void Exit()
+    {
+        base.Exit();
+        statPanelController.HidePrimary();
+    }
 
     IEnumerator ChangeCurrentUnit()
     {
@@ -22,6 +27,7 @@ public class SelectUnitState : BattleState
         index = (index + 1) % units.Count;
         // 현재 턴 유닛 지정
         turn.Change(units[index]);
+        RefreshPrimaryStatPanel(pos);
         yield return null;
         //  명령 상태로 이동
         owner.ChangeState<CommandSelectionState>();

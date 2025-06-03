@@ -14,6 +14,7 @@ public class MoveTargetState : BattleState
         Movement mover = turn.actor.GetComponent<Movement>();
         tiles = mover.GetTilesInRange(board);
         board.SelectTiles(tiles);
+        RefreshPrimaryStatPanel(pos);
     }
 
     public override void Exit()
@@ -21,12 +22,14 @@ public class MoveTargetState : BattleState
         base.Exit();
         board.DeSelectTiles(tiles);
         tiles = null;
+        statPanelController.HidePrimary();
     }
 
     // 이동 입력 발생 시 현재 위치(pos)에 입력 방향(e.info)를 더해 새로운 타일 선택
     protected override void OnMove(object sender, InfoEventArgs<Point> e)
     {
         SelectTile(e.info + pos);
+        RefreshPrimaryStatPanel(pos);
     }
 
     protected override void OnFire(object sender, InfoEventArgs<int> e)

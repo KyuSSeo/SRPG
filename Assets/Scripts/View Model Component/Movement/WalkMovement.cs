@@ -13,7 +13,7 @@ public class WalkMovement : Movement
         if ((Mathf.Abs(from.height - tile.height) > jumpHeight))
             return false;
         //  점프는 가능하지만 무언가가 타일을 점유중이면
-        if (tile.contents != null)
+        if (tile.content != null)
             return false;
         return base.ExpandSearch(from, tile);
     }

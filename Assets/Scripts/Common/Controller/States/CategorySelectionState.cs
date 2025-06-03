@@ -6,6 +6,18 @@ using System.Collections.Generic;
 //  행동에서 어떠한 행동을 할 것인지 고르기
 public class CategorySelectionState : BaseAbilityMenuState
 {
+    public override void Enter()
+    {
+        base.Enter();
+        statPanelController.ShowPrimary(turn.actor.gameObject);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        statPanelController.HidePrimary();
+    }
+
     //  행동 하위 매뉴
     protected override void LoadMenu()
     {
