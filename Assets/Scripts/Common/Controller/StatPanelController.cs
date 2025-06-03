@@ -7,6 +7,7 @@ public class StatPanelController : MonoBehaviour
     private const string ShowKey = "Show";
     private const string HideKey = "Hide";
 
+    // Ç¥½ÃÇÒ °´Ã¼
     [SerializeField] StatPanel primaryPanel;
     [SerializeField] StatPanel secondaryPanel;
 

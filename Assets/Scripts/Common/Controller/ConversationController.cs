@@ -21,6 +21,7 @@ public class ConversationController : MonoBehaviour
     
     // 대화 종료 이벤트
     public static event EventHandler completeEvent;
+
     private void Start()
     {
         canvas = GetComponentInChildren<Canvas>();
