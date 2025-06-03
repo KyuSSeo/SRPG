@@ -62,6 +62,7 @@ public class CategorySelectionState : BaseAbilityMenuState
         //  이동했을 경우 위치 고정
         turn.ability = turn.actor.GetComponentInChildren<AbilityRange>().gameObject;
         owner.ChangeState<AbilityTargetState>();
+
     }
 
     //  공격 외 행동 선택하는 리스트상태
