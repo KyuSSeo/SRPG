@@ -1246,7 +1246,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3476731583941658572}
   - component: {fileID: 1585376002115493419}
-  - component: {fileID: 5715967993450470298}
   m_Layer: 0
   m_Name: Camera Rig
   m_TagString: Untagged
@@ -1284,18 +1283,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   follow: {fileID: 2379883901666687839}
---- !u!114 &5715967993450470298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4230431752859715029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d17a6459e5ff7ba4dbc28a2ee39d0a2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4246301430057835113
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,9 +1615,11 @@ MonoBehaviour:
   pos:
     x: 0
     y: 0
-  heroPrefab: {fileID: 0}
+  heroPrefab: {fileID: 2585055441107811349, guid: 9fe551bca939500438da09d6baf3d763,
+    type: 3}
   abilityMenuPanelController: {fileID: 4881921855939203020}
   units: []
+  statPanelController: {fileID: 7383912940695134003}
 --- !u!114 &2277588186706674034
 MonoBehaviour:
   m_ObjectHideFlags: 0

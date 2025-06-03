@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Demo : MonoBehaviour
+public class TestStatus : MonoBehaviour
 {
     Unit cursedUnit;
     Equippable cursedItem;
@@ -53,6 +53,7 @@ public class Demo : MonoBehaviour
 
     void EquipCursedItem(Unit target)
     {
+        Debug.Log("장비");
         cursedUnit = target;
 
         GameObject obj = new GameObject("Cursed Sword");
@@ -66,6 +67,7 @@ public class Demo : MonoBehaviour
 
     void UnEquipCursedItem(Unit target)
     {
+        Debug.Log("해제");
         if (target != cursedUnit || step < 10)
             return;
 
