@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HasteStatusEffect : StatusEffect
+public class SlowStatusEffect : StatusEffect
 {
     private Stats myStats;
 
@@ -18,11 +18,11 @@ public class HasteStatusEffect : StatusEffect
     {
         this.RemoveObserver(OnCounterWillChange, Stats.WillChangeNotification(StatTypes.CTR), myStats);
     }
-    //  턴 속도를 다르는 카운트에 수치 가산
+    //  속도 0.5배 슬로우
     private void OnCounterWillChange(object sender, object args)
     {
         ValueChangeException exc = args as ValueChangeException;
-        MultDeltaModifier m = new MultDeltaModifier(0, 2);
+        MultDeltaModifier m = new MultDeltaModifier(0, 0.5f);
         exc.AddModifier(m);
     }
 }

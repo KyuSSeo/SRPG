@@ -13,10 +13,11 @@ public class TurnOrderController : MonoBehaviour
     private const int actionCost = 200;
 
     //  알림
-    public const string RoundBeganNotification = "TurnOrderController.roundBegan";
-    public const string TurnCheckNotification = "TurnOrderController.turnCheck";
-    public const string TurnCompletedNotification = "TurnOrderController.turnCompleted";
-    public const string RoundEndedNotification = "TurnOrderController.roundEnded";
+    public const string RoundBeganNotification = "TurnOrderController.roundBegan";              // 라운드 시작
+    public const string RoundEndedNotification = "TurnOrderController.roundEnded";              // 라운드 종료
+    public const string TurnCheckNotification = "TurnOrderController.turnCheck";                // 턴 체크
+    public const string TurnCompletedNotification = "TurnOrderController.turnCompleted";        // 턴 완료
+    public const string TurnBeganNotification = "TurnOrderController.TurnBeganNotification";    // 턴 시작
 
     //  CRT 에 따라서 턴 획득 코루틴
     public IEnumerator Round()
@@ -45,6 +46,8 @@ public class TurnOrderController : MonoBehaviour
                 if (CanTakeTurn(units[i]))
                 {
                     bc.turn.Change(units[i]);
+                    //  턴 시작 알림
+                    units[i].PostNotification(TurnBeganNotification);
                     //  턴 실행
                     yield return units[i];
 
@@ -59,12 +62,12 @@ public class TurnOrderController : MonoBehaviour
                     Stats s = units[i].GetComponent<Stats>();
                     s.SetValue(StatTypes.CTR, s[StatTypes.CTR] - cost, false);
                     
-                    // 해당 유닛의 턴 완료
+                    // 해당 유닛의 턴 완료 알림
                     units[i].PostNotification(TurnCompletedNotification);
                 }
             }
 
-            // 라운드 종료
+            // 라운드 종료 알림
             this.PostNotification(RoundEndedNotification);
         }
     }
