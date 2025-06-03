@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,7 +31,8 @@ public class BattleController : StateMachine
     public List<Unit> units = new List<Unit>();
     //  전투 스텟 UI 참조용
     public StatPanelController statPanelController;
-
+    //  라운드 사용
+    public IEnumerator round;
     #endregion
 
     private void Start()
