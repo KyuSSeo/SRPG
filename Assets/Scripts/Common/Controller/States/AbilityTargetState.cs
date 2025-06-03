@@ -41,12 +41,11 @@ public class AbilityTargetState : BattleState
     /// 확인/취소 처리
     protected override void OnFire(object sender, InfoEventArgs<int> e)
     {
+        //  대상의 유효함 여부 판단
         if (e.info == 0)
         {
-            turn.hasUnitActed = true;
-            if (turn.hasUnitMoved)
-                turn.lockMove = true;
-            owner.ChangeState<CommandSelectionState>();
+            if (ar.directionOriented || tiles.Contains(board.GetTile(pos)))
+                owner.ChangeState<ConfirmAbilityTargetState>();
         }
         else
         {
