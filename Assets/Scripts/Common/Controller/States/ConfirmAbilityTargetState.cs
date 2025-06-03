@@ -13,12 +13,17 @@ public class ConfirmAbilityTargetState : BattleState
     public override void Enter()
     {
         base.Enter();
+        if (turn.ability == null)
         aArea = turn.ability.GetComponent<AbilityArea>();
         tiles = aArea.GetTilesInArea(board, pos);
         board.SelectTiles(tiles);
         FindTargets();
         RefreshPrimaryStatPanel(turn.actor.tile.pos);
-        SetTarget(0);
+        if (turn.targets.Count > 0)
+        {
+            hitSuccessIndicator.Show();
+            SetTarget(0);
+        }
     }
     public override void Exit()
     {
@@ -26,6 +31,7 @@ public class ConfirmAbilityTargetState : BattleState
         board.DeSelectTiles(tiles);
         statPanelController.HidePrimary();
         statPanelController.HideSecondary();
+        hitSuccessIndicator.Hide();
     }
 
     //  타일 이동
@@ -80,6 +86,25 @@ public class ConfirmAbilityTargetState : BattleState
 
         // 타겟이 존재하면 패널 표시
         if (turn.targets.Count > 0)
+        {
             RefreshSecondaryStatPanel(turn.targets[index].pos);
+            UpdateHitSuccessIndicator();
+        }
+    }
+    private void UpdateHitSuccessIndicator()
+    {
+        int chance = CalculateHitRate();
+        int amount = EstimateDamage();
+        hitSuccessIndicator.SetStats(chance, amount);
+    }
+    private int CalculateHitRate()
+    {
+        Unit target = turn.targets[index].content.GetComponent<Unit>();
+        HitRate hr = turn.ability.GetComponentInChildren<HitRate>();
+        return hr.Calculate(turn.actor, target);
+    }
+    private int EstimateDamage()
+    {
+        return 50;
     }
 }

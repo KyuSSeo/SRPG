@@ -31,6 +31,7 @@ public class BattleController : StateMachine
     public List<Unit> units = new List<Unit>();
     //  전투 스텟 UI 참조용
     public StatPanelController statPanelController;
+    public HitSuccessIndicator hitSuccessIndicator;
     //  라운드 사용
     public IEnumerator round;
     #endregion

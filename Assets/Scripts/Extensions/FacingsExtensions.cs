@@ -17,18 +17,4 @@ public static class FacingsExtensions
             return Facings.Front;
         return Facings.Side;
     }
-    public static Point GetNormal(this Directions dir)
-    {
-        switch (dir)
-        {
-            case Directions.North:
-                return new Point(0, 1);
-            case Directions.East:
-                return new Point(1, 0);
-            case Directions.South:
-                return new Point(0, -1);
-            default:
-                return new Point(-1, 0);
-        }
-    }
 }

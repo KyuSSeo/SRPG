@@ -28,6 +28,22 @@ public static class DirectionsExtensions
         return Directions.West;
     }
 
+    // 유닛 방향 판단
+    public static Point GetNormal(this Directions dir)
+    {
+        switch (dir)
+        {
+            case Directions.North:
+                return new Point(0, 1);
+            case Directions.East:
+                return new Point(1, 0);
+            case Directions.South:
+                return new Point(0, -1);
+            default: // Directions.West:
+                return new Point(-1, 0);
+        }
+    }
+
     //  열거형 방위를 int변환하여 각도 변경
     public static Vector3 ToEuler(this Directions dir)
     {

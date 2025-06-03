@@ -18,7 +18,7 @@ public class BattleState : State
     public Tile currentTile { get { return owner.currentTile; } }
     public StatPanelController statPanelController { get { return owner.statPanelController; } }
     public AbilityMenuPanelController abilityMenuPanelController { get { return owner.abilityMenuPanelController; } }
-
+    public HitSuccessIndicator hitSuccessIndicator { get { return owner.hitSuccessIndicator; } }
     //  ÃÊ±âÈ­
     protected virtual void Awake() => Init();
     private void Init()
