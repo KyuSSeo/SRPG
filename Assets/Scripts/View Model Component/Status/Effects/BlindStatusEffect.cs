@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class BlindStatusEffect : MonoBehaviour
+public class BlindStatusEffect : StatusEffect
 {
     //  이벤트 등록
     private void OnEnable()

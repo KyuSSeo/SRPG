@@ -6,8 +6,8 @@ using System.Collections.Generic;
 
 public class CutSceneState : BattleState
 {
-    ConversationController conversationController;
-    ConversationData data;
+    private ConversationController conversationController;
+    private ConversationData data;
 
 
     protected override void Awake()

@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [System.Serializable]
-public struct Point
+public struct Point : IEquatable<Point>
 {
     //  이 구조체에서의 X값과 Y값은 Vector2의 X,Y를 의미하지 않는다.
     public int x;
@@ -61,6 +62,7 @@ public struct Point
     {
         return string.Format("({0},{1})", x, y);
     }
+
     //  벡터 변환
     public static implicit operator Vector2(Point p)
     {

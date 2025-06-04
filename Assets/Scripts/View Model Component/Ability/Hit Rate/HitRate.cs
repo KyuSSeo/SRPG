@@ -8,17 +8,25 @@ public abstract class HitRate : MonoBehaviour
     public const string AutomaticHitCheckNotification = "HitRate.AutomaticHitCheckNotification";
     public const string AutomaticMissCheckNotification = "HitRate.AutomaticMissCheckNotification";
     public const string StatusCheckNotification = "HitRate.StatusCheckNotification";
+   
+    protected Unit attacker;
+    
     //  명중 확률
-    public abstract int Calculate(Unit attacker, Unit target);
+    public abstract int Calculate(Tile target);
+
+    protected virtual void Start()
+    {
+        attacker = GetComponentInParent<Unit>();
+    }
 
     //  명중 여부 전달
-    protected virtual bool AutomaticHit(Unit attacker, Unit target)
+    protected virtual bool AutomaticHit(Unit target)
     {
         MatchException exc = new MatchException(attacker, target);
         this.PostNotification(AutomaticHitCheckNotification, exc);
         return exc.toggle;
     }
-    protected virtual bool AutomaticMiss(Unit attacker, Unit target)
+    protected virtual bool AutomaticMiss(Unit target)
     {
         MatchException exc = new MatchException(attacker, target);
         this.PostNotification(AutomaticMissCheckNotification, exc);
@@ -26,7 +34,7 @@ public abstract class HitRate : MonoBehaviour
     }
 
     //  상태에 영향을 받는 명중
-    protected virtual int AdjustForStatusEffects(Unit attacker, Unit target, int rate)
+    protected virtual int AdjustForStatusEffects(Unit target, int rate)
     {
         Info<Unit, Unit, int> args = new Info<Unit, Unit, int>(attacker, target, rate);
         this.PostNotification(StatusCheckNotification, args);

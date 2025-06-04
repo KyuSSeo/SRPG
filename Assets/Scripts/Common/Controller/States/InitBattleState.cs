@@ -27,7 +27,7 @@ public class InitBattleState :BattleState
         owner.round = owner.gameObject.AddComponent<TurnOrderController>().Round();
         yield return null;
         //  맵 초기화 완료 후 상태 전환
-        owner.ChangeState<SelectUnitState>();
+        owner.ChangeState<CutSceneState>();
     }
 
 

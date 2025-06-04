@@ -14,17 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   list:
   - messages:
-    - Kim
-    - Sin
-    - Gop
-    speaker: {fileID: 21300000, guid: 4df3bdf65a08cf040b6726a060a942b6, type: 3}
-    anchor: 0
-  - messages:
-    - Mark
-    - Dea
-    speaker: {fileID: 21300000, guid: 4df3bdf65a08cf040b6726a060a942b6, type: 3}
-    anchor: 0
-  - messages:
-    - Dore
+    - Hi
     speaker: {fileID: 21300000, guid: 4df3bdf65a08cf040b6726a060a942b6, type: 3}
     anchor: 0

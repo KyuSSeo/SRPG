@@ -9,6 +9,7 @@ public class ConfirmAbilityTargetState : BattleState
     private List<Tile> tiles;
     //  능력 범위 타일
     private AbilityArea aArea;
+    private AbilityEffectTarget[] targeters;
     private int index = 0;
     public override void Enter()
     {
@@ -59,7 +60,7 @@ public class ConfirmAbilityTargetState : BattleState
     private void FindTargets()
     {
         turn.targets = new List<Tile>();
-        AbilityEffectTarget[] targeters = turn.ability.GetComponentsInChildren<AbilityEffectTarget>();
+        targeters = turn.ability.GetComponentsInChildren<AbilityEffectTarget>();
         for (int i = 0; i < tiles.Count; ++i)
             if (IsTarget(tiles[i], targeters))
                 turn.targets.Add(tiles[i]);
@@ -92,18 +93,23 @@ public class ConfirmAbilityTargetState : BattleState
     }
     private void UpdateHitSuccessIndicator()
     {
-        int chance = CalculateHitRate();
-        int amount = EstimateDamage();
+        int chance = 0;
+        int amount = 0;
+        Tile target = turn.targets[index];
+
+        for (int i = 0; i < targeters.Length; ++i)
+        {
+            if (targeters[i].IsTarget(target))
+            {
+                HitRate hitRate = targeters[i].GetComponent<HitRate>();
+                chance = hitRate.Calculate(target);
+
+                BaseAbilityEffect effect = targeters[i].GetComponent<BaseAbilityEffect>();
+                amount = effect.Predict(target);
+                break;
+            }
+        }
+
         hitSuccessIndicator.SetStats(chance, amount);
-    }
-    private int CalculateHitRate()
-    {
-        Unit target = turn.targets[index].content.GetComponent<Unit>();
-        HitRate hr = turn.ability.GetComponentInChildren<HitRate>();
-        return hr.Calculate(turn.actor, target);
-    }
-    private int EstimateDamage()
-    {
-        return 50;
     }
 }
