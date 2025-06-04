@@ -10,13 +10,13 @@ public class InflictAbilityEffect : BaseAbilityEffect
 	{
 		return 0;
 	}
-	public override void Apply (Tile target)
-	{
+    protected override int OnApply(Tile target)
+    {
 		Type statusType = Type.GetType(statusName);
 		if (statusType == null || !statusType.IsSubclassOf(typeof(StatusEffect)))
 		{
 			Debug.LogError("상태 이상");
-			return;
+			return 0;
 		}
 		MethodInfo mi = typeof(Status).GetMethod("Add");
 		Type[] types = new Type[]{ statusType, typeof(DurationStatusCondition) };
@@ -25,5 +25,6 @@ public class InflictAbilityEffect : BaseAbilityEffect
 		object retValue = constructed.Invoke(status, null);
 		DurationStatusCondition condition = retValue as DurationStatusCondition;
 		condition.duration = duration;
-	}
+        return 0;
+    }
 }

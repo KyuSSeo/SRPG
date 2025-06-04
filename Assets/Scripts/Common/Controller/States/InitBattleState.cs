@@ -34,6 +34,7 @@ public class InitBattleState :BattleState
     //  유닛 배치 테스트 함수
     private void SpawnTestUnits()
     {
+
         //  유닛 타입
         string[] jobs = new string[] { "Rogue", "Warrior", "Wizard" };
         
@@ -65,7 +66,11 @@ public class InitBattleState :BattleState
             unit.Place(board.GetTile(p));
             unit.Match();
 
+            //  이동, Hp, Mp 구성요소 추가
             instance.AddComponent<WalkMovement>();
+            instance.AddComponent<Health>();
+            instance.AddComponent<Mana>();
+
             //  전투 리스트에 유닛 추가
             units.Add(unit);
         }
