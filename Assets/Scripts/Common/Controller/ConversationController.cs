@@ -53,8 +53,8 @@ public class ConversationController : MonoBehaviour
     private void MovePanel(ConversationPanel obj, string pos)
     {
         transition = obj.panel.SetPosition(pos, true);
-        transition.easingControl.duration = 0.5f;
-        transition.easingControl.equation = EasingEquations.EaseOutQuad;
+        transition.duration = 0.5f;
+        transition.equation = EasingEquations.EaseOutQuad;
     }
 
     // 대화 순차적 진행
@@ -96,7 +96,7 @@ public class ConversationController : MonoBehaviour
             MovePanel(currentPanel, hide);
             
             // 다음 메시지 진행
-            transition.easingControl.completedEvent += delegate (object sender, EventArgs e) {
+            transition.completedEvent += delegate (object sender, EventArgs e) {
                 conversation.MoveNext();
             };
             yield return null;

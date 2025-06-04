@@ -25,8 +25,8 @@ public class ConversationPanel : MonoBehaviour
             );
 
         // 화살표 애니메이션 무한 반복
-        t.easingControl.loopType = EasingControl.LoopType.PingPong;
-        t.easingControl.loopCount = -1;
+        t.loopType = EasingControl.LoopType.PingPong;
+        t.loopCount = -1;
     }
 
     //  대화 표시 코루틴

@@ -82,7 +82,7 @@ public class WalkMovement : Movement
         Tweener tweener = transform.MoveTo(target.center, 0.5f, EasingEquations.Linear);
         Tweener tweener2 = jumper.MoveToLocal(
             new Vector3(0, Tile.stepHeight * 2f, 0),
-            tweener.easingControl.duration / 2f,
+            tweener.duration / 2f,
             EasingEquations.EaseOutQuad
         );
 

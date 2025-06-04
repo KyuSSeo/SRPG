@@ -17,9 +17,9 @@ public class TeleportMovement : Movement
             EasingEquations.EaseInOutQuad
         );
 
-        spin.easingControl.loopCount = 1;
+        spin.loopCount = 1;
         // PingPong : 회전 후 원래 각도로
-        spin.easingControl.loopType = EasingControl.LoopType.PingPong;
+        spin.loopType = EasingControl.LoopType.PingPong;
        
         // 유닛의 전체 크기를 0으로 줄이는 애니메이션
         Tweener shrink = transform.ScaleTo(Vector3.zero, 0.5f, EasingEquations.EaseInBack);
