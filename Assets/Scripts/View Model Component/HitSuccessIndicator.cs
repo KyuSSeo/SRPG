@@ -22,7 +22,8 @@ public class HitSuccessIndicator : MonoBehaviour
     public void SetStats(int chance, int amount)
     {
         arrow.fillAmount = (chance / 100f);
-        label.text = string.Format("{0}% {1}pt(s)", chance, amount);
+        label.text = string.Format("{0}% {1}pt(s)", chance, Mathf.Abs(amount));
+        label.color = amount > 0 ? Color.green : Color.red; ;
     }
     public void Show()
     {

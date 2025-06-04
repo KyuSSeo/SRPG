@@ -66,13 +66,19 @@ public class InitBattleState :BattleState
             unit.Place(board.GetTile(p));
             unit.Match();
 
-            //  이동, Hp, Mp 구성요소 추가
+            //  이동요소 추가
             instance.AddComponent<WalkMovement>();
-            instance.AddComponent<Health>();
-            instance.AddComponent<Mana>();
 
             //  전투 리스트에 유닛 추가
             units.Add(unit);
+            Rank rank = instance.AddComponent<Rank>();
+            rank.Init(10);
+
+            // Hp, Mp 정보 추가
+            instance.AddComponent<Health>();
+            instance.AddComponent<Mana>();
+
+            instance.name = jobs[i];
         }
     }
 }

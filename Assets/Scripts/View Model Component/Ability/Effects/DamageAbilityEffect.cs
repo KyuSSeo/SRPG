@@ -23,7 +23,7 @@ public class DamageAbilityEffect : BaseAbilityEffect
     {
         Unit defender = target.content.GetComponent<Unit>();
         int value = Predict(target);
-        value = Mathf.FloorToInt(value * UnityEngine.Random.Range(0.9f, 1.1f));
+        value = Mathf.FloorToInt(value * Random.Range(0.9f, 1.1f));
         value = Mathf.Clamp(value, minDamage, maxDamage);
         Stats s = defender.GetComponent<Stats>();
         s[StatTypes.HP] += value;

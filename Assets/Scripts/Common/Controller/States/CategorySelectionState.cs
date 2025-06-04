@@ -1,5 +1,3 @@
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 
@@ -22,32 +20,32 @@ public class CategorySelectionState : BaseAbilityMenuState
     protected override void LoadMenu()
     {
         if (menuOptions == null)
-        {
-            menuTitle = "Action";
-            menuOptions = new List<string>(3);
-            menuOptions.Add("Attack");
-            menuOptions.Add("White Magic");
-            menuOptions.Add("Black Magic");
-        }
-        // 메뉴 표시
+            menuOptions = new List<string>();
+        else
+            menuOptions.Clear();
+
+
+        //  트리에서 Action 만 별개의 항목으로 관리
+        menuTitle = "Action";
+        menuOptions.Add("Attack");
+        //  나머지 항목 출력
+        AbilityCatalog catalog = turn.actor.GetComponentInChildren<AbilityCatalog>();
+        for (int i = 0; i < catalog.CategoryCount(); ++i)
+            menuOptions.Add(catalog.GetCategory(i).name);
+
         abilityMenuPanelController.Show(menuTitle, menuOptions);
+
     }
+    // 메뉴 표시
+
 
     //  행동 하위 매뉴 중 선택했을 때
     protected override void Confirm()
     {
-        switch (abilityMenuPanelController.selection)
-        {
-            case 0:
-                Attack();
-                break;
-            case 1:
-                SetCategory(0);
-                break;
-            case 2:
-                SetCategory(1);
-                break;
-        }
+        if (abilityMenuPanelController.selection == 0)
+            Attack();
+        else
+            SetCategory(abilityMenuPanelController.selection - 1);
     }
 
     //  이전 상태로 돌아가기
@@ -60,9 +58,8 @@ public class CategorySelectionState : BaseAbilityMenuState
     private void Attack()
     {
         //  이동했을 경우 위치 고정
-        turn.ability = turn.actor.GetComponentInChildren<AbilityRange>().gameObject;
+        turn.ability = turn.actor.GetComponentInChildren<Ability>();
         owner.ChangeState<AbilityTargetState>();
-
     }
 
     //  공격 외 행동 선택하는 리스트상태

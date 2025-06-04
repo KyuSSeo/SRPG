@@ -29,25 +29,6 @@ public class PerformAbilityState : BattleState
 
     private void ApplyAbility()
     {
-        BaseAbilityEffect[] effects = turn.ability.GetComponentsInChildren<BaseAbilityEffect>();
-        for (int i = 0; i < turn.targets.Count; ++i)
-        {
-            Tile target = turn.targets[i];
-            for (int j = 0; j < effects.Length; ++j)
-            {
-                BaseAbilityEffect effect = effects[j];
-                AbilityEffectTarget targeter = effect.GetComponent<AbilityEffectTarget>();
-                if (targeter.IsTarget(target))
-                {
-                    HitRate rate = effect.GetComponent<HitRate>();
-                    int chance = rate.Calculate(target);
-                    if (Random.Range(0, 101) > chance)
-                    {
-                        continue;
-                    }
-                    effect.Apply(target);
-                }
-            }
-        }
+        turn.ability.Perform(turn.targets);
     }
 }

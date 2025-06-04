@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-// 강한 육군
 public class WalkMovement : Movement
 {
     //  타일 높이를 비교하여 점프가 가능한가?
@@ -38,8 +36,11 @@ public class WalkMovement : Movement
             Directions dir = from.GetDirections(to);
 
             if (unit.dir != dir)
-                yield return StartCoroutine(Walk(to));
+                yield return StartCoroutine(Turn(dir));
+
             if (from.height == to.height)
+                yield return StartCoroutine(Walk(to));
+            else
                 yield return StartCoroutine(Jump(to));
         }
         yield return null;
@@ -80,13 +81,13 @@ public class WalkMovement : Movement
     private IEnumerator Jump(Tile target)
     {
         Tweener tweener = transform.MoveTo(target.center, 0.5f, EasingEquations.Linear);
-        Tweener tweener2 = jumper.MoveToLocal(
-            new Vector3(0, Tile.stepHeight * 2f, 0),
-            tweener.duration / 2f,
-            EasingEquations.EaseOutQuad
-        );
+
+        Tweener t2 = jumper.MoveToLocal(new Vector3(0, Tile.stepHeight * 2f, 0), tweener.duration / 2f, EasingEquations.EaseOutQuad);
+        t2.loopCount = 1;
+        t2.loopType = EasingControl.LoopType.PingPong;
 
         while (tweener != null)
             yield return null;
     }
 }
+
