@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
+    // 타일 이동 관련
+    [SerializeField] public Tile prev;
+    [SerializeField] public int distance;
     //  위치와 높이 정보
     public Point pos;
     public int height;
+
+    //  기타 엔티티의 정보
+    public GameObject content;
     //  높이 정보 4단계
     public const float stepHeight = 0.25f;
     
