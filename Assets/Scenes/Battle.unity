@@ -333,6 +333,16 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 1278239175194209657, guid: b93ef25db412dd44c8252fe86815a48d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 340
+      objectReference: {fileID: 0}
+    - target: {fileID: 1278239175194209657, guid: b93ef25db412dd44c8252fe86815a48d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2002375614407385792, guid: b93ef25db412dd44c8252fe86815a48d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -412,6 +422,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Battle Controller
+      objectReference: {fileID: 0}
+    - target: {fileID: 5032653465380730319, guid: b93ef25db412dd44c8252fe86815a48d,
+        type: 3}
+      propertyPath: positionList.Array.data[1].parentAnchor
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5375772992237363676, guid: b93ef25db412dd44c8252fe86815a48d,
         type: 3}
