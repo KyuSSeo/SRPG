@@ -12,8 +12,7 @@ public class ConfirmAbilityTargetState : BattleState
     private int index = 0;
     public override void Enter()
     {
-        base.Enter();
-        if (turn.ability == null)
+        base.Enter();   
         aArea = turn.ability.GetComponent<AbilityArea>();
         tiles = aArea.GetTilesInArea(board, pos);
         board.SelectTiles(tiles);
