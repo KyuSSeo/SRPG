@@ -99,7 +99,7 @@ public class Panel : MonoBehaviour
 
         // 기존 애니메이션 중지
         if (InTransition)
-            Transition.easingControl.Stop();
+            Transition.Stop();
 
         //  애니메이션 여부에 따라 애니메이션 적용 여부 선택
         if (animated)

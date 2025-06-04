@@ -4,6 +4,8 @@ using UnityEditor;
 using UnityEngine;
 using System.IO;
 
+
+#if UNITY_EDITOR
 //  시각적 보드 편집기
 public class BoardCreator : MonoBehaviour
 {
@@ -195,3 +197,4 @@ public class BoardCreator : MonoBehaviour
         AssetDatabase.Refresh();
     }
 }
+#endif

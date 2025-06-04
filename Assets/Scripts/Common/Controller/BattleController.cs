@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,6 +29,11 @@ public class BattleController : StateMachine
     public Turn turn = new Turn();
     //  맵에 전투중인 유닛들
     public List<Unit> units = new List<Unit>();
+    //  전투 스텟 UI 참조용
+    public StatPanelController statPanelController;
+    public HitSuccessIndicator hitSuccessIndicator;
+    //  라운드 사용
+    public IEnumerator round;
     #endregion
 
     private void Start()

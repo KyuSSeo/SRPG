@@ -5,7 +5,17 @@ using System.Collections.Generic;
 //  턴 시작시 메뉴표시 이동, 행동, 대기 선택
 public class CommandSelectionState : BaseAbilityMenuState
 {
+    public override void Enter()
+    {
+        base.Enter();
+        statPanelController.ShowPrimary(turn.actor.gameObject);
+    }
 
+    public override void Exit()
+    {
+        base.Exit();
+        statPanelController.HidePrimary();
+    }
     //  메뉴 로딩
     protected override void LoadMenu()
     {

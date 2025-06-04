@@ -18,15 +18,15 @@ public static class RectTransformAnimationExtensions
     public static Tweener AnchorTo(this RectTransform t, Vector3 position, float duration, Func<float, float, float, float> equation)
     {
         RectTransformAnchorPositionTweener tweener = t.gameObject.AddComponent<RectTransformAnchorPositionTweener>();
-        
+
         //  시작 위치, 끝 위치 설정
-        tweener.startValue = t.anchoredPosition;
-        tweener.endValue = position;
+        tweener.startTweenValue = t.anchoredPosition;
+        tweener.endTweenValue = position;
 
         //  지속 시간과 속도 곡선 설정
-        tweener.easingControl.duration = duration;
-        tweener.easingControl.equation = equation;
-        tweener.easingControl.Play();
+        tweener.duration = duration;
+        tweener.equation = equation;
+        tweener.Play();
 
         //  애니메이션 제어 Tweener 전달 
         return tweener;

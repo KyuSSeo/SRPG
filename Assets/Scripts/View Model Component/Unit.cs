@@ -16,14 +16,14 @@ public class Unit : MonoBehaviour
     public void Place(Tile target)
     {
         // 이전 타일이 이 유닛을 content로 가지고 있다면 연결 해제
-        if (tile != null && tile.contents == gameObject)
-            tile.contents = null;
+        if (tile != null && tile.content == gameObject)
+            tile.content = null;
 
         // 새 타일로 유닛의 참조를 갱신
         tile = target;
         // 새 타일이 존재하면, 해당 타일의 content에 이 유닛 등록
         if (target != null)
-            target.contents = gameObject;
+            target.content = gameObject;
     }
 
     //  타일 중앙에 위치, 방향을 바라보도록 설정

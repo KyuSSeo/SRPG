@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 //  RectTransform을 필수로 요구하도록 함
 

@@ -36,19 +36,19 @@ public static class JobParser
     }
     private static void PartsStartingStats(string line)
     {
-        // 쉼표 기준 분리
         string[] elements = line.Split(',');
-        // 직업 이름으로 프리팹 생성
         GameObject obj = GetOrCreate(elements[0]);
         Job job = obj.GetComponent<Job>();
-        // 각 기본 스탯 설정
         for (int i = 1; i < Job.statOrder.Length + 1; ++i)
             job.baseStats[i - 1] = Convert.ToInt32(elements[i]);
-        // 이동, 점프 수치 설정
+        StatModifierFeature evade = GetFeature(obj, StatTypes.EVD);
+        evade.amount = Convert.ToInt32(elements[8]);
+        StatModifierFeature res = GetFeature(obj, StatTypes.RES);
+        res.amount = Convert.ToInt32(elements[9]);
         StatModifierFeature move = GetFeature(obj, StatTypes.MOV);
-        move.amount = Convert.ToInt32(elements[8]);
+        move.amount = Convert.ToInt32(elements[10]);
         StatModifierFeature jump = GetFeature(obj, StatTypes.JMP);
-        jump.amount = Convert.ToInt32(elements[9]);
+        jump.amount = Convert.ToInt32(elements[11]);
     }
 
     // 직업 성장정보 JobGrowthStats.csv 파싱

@@ -12,7 +12,7 @@ public class Tile : MonoBehaviour
     public int height;
 
     //  기타 엔티티의 정보
-    public GameObject contents;
+    public GameObject content;
     //  높이 정보 4단계
     public const float stepHeight = 0.25f;
     

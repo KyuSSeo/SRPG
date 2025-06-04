@@ -24,6 +24,7 @@ public class StateMachine : MonoBehaviour
     {
         CurrentState = GetState<T>();
     }
+
     protected virtual void Trensition (State value)
     {
         //  동일한 상태로 전환 시도 시 종료
